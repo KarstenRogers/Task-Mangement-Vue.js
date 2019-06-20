@@ -22,6 +22,12 @@
         &times;
       </div>
     </div>
+
+    <div class="check-container">
+      <div>
+        <label><input type="checkbox" :checked="!taskRemaining" /> Check All</label>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -106,4 +112,14 @@ export default {
   text-decoration: line-through;
   color: red;
 }
+
+    .check-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 16px;
+        border-top: 1px solid lightgray;
+        padding-top: 14px;
+        margin-bottom: 14px;
+    }
 </style>
