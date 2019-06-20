@@ -22,11 +22,8 @@
         &times;
       </div>
     </div>
-
     <div class="check-container">
-      <div>
-        <label><input type="checkbox" :checked="!taskRemaining" /> Check All</label>
-      </div>
+      <div>{{ remaining }} items left</div>
     </div>
   </div>
 </template>
@@ -37,9 +34,14 @@ export default {
   data() {
     return {
       newTask: "",
-      idForTask: 1,
+      idForTask: [],
       tasks: []
     };
+  },
+  computed: {
+    remaining() {
+      return this.tasks.filter(task => !task.completed).length;
+    }
   },
   methods: {
     addTask() {
@@ -113,13 +115,13 @@ export default {
   color: red;
 }
 
-    .check-container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-size: 16px;
-        border-top: 1px solid lightgray;
-        padding-top: 14px;
-        margin-bottom: 14px;
-    }
+.check-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+  border-top: 3px solid black;
+  padding-top: 10px;
+  color: black;
+}
 </style>
