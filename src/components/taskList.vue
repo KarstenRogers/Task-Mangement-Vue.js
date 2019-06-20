@@ -8,7 +8,13 @@
       v-model="newTask"
       @keyup.enter="addTask"
     />
-    <div v-for="(task, index) in tasks" :key="task.id" class="task-item">
+    <div
+      v-for="(task, index) in tasks"
+      :key="task.id"
+      class="task-item"
+      :class="{ completed: task.completed }"
+    >
+      <input class="checkbox" type="checkbox" v-model="task.completed" />
       <div>
         {{ task.title }}
       </div>
@@ -64,18 +70,28 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: lightgray;
+  background-color: #f2f2f2;
   color: black;
 }
 
 .remove-item {
   cursor: pointer;
-  font-size: 20px;
-    color: black;
+  font-size: 22px;
+  color: black;
 }
 
 .center {
   text-align: center;
   font-size: 28px;
+}
+
+.checkbox {
+  height: 20px;
+  width: 20px;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: red;
 }
 </style>
