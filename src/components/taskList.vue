@@ -24,6 +24,9 @@
     </div>
     <div class="check-container">
       <div>{{ remaining }} items left</div>
+      <button class="clearAll" @click="clearAll()">
+        Clear All
+      </button>
     </div>
   </div>
 </template>
@@ -56,6 +59,9 @@ export default {
     },
     removeTask(index) {
       this.tasks.splice(index, 1);
+    },
+    clearAll() {
+      this.tasks = [];
     }
   },
   mounted() {
@@ -81,7 +87,8 @@ export default {
   margin-bottom: 15px;
 
   &:focus {
-    outline: 0;
+    outline: 1;
+    outline-color: black;
   }
 }
 
@@ -90,14 +97,22 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #f2f2f2;
-  color: black;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+
+  &:hover {
+    color: black;
+    background-color: white;
+    transition: all 0.5s ease-in;
+  }
 }
 
 .remove-item {
   cursor: pointer;
   font-size: 22px;
-  color: black;
+  color: white;
 }
 
 .center {
@@ -108,6 +123,7 @@ export default {
 .checkbox {
   height: 20px;
   width: 20px;
+  cursor: pointer;
 }
 
 .completed {
@@ -123,5 +139,19 @@ export default {
   border-top: 3px solid black;
   padding-top: 10px;
   color: black;
+}
+
+.clearAll {
+  width: 95px;
+  border: 1px solid black;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+
+  &:hover {
+    background-color: black;
+    color: white;
+    transition: all 0.5s ease-in-out;
+  }
 }
 </style>
