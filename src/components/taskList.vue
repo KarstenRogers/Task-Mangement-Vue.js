@@ -13,6 +13,7 @@
       :key="task.id"
       class="task-item"
       :class="{ completed: task.completed }"
+      @dblclick="editTask(task)"
     >
       <input class="checkbox" type="checkbox" v-model="task.completed" />
       <div>
@@ -23,7 +24,7 @@
       </div>
     </div>
     <div class="check-container">
-      <div>{{ remaining }} items left</div>
+      <div>{{ remaining }} items remaining</div>
       <button class="clearAll" @click="clearAll()">
         Clear All
       </button>
@@ -62,6 +63,10 @@ export default {
     },
     clearAll() {
       this.tasks = [];
+    },
+    editTask: function(task) {
+      this.beforeEditCache = task.title;
+      this.task = task;
     }
   },
   mounted() {
@@ -113,6 +118,10 @@ export default {
   cursor: pointer;
   font-size: 22px;
   color: white;
+
+  &:hover {
+    color: black;
+  }
 }
 
 .center {
