@@ -1,20 +1,23 @@
 <template>
   <div>
     <p class="center">Task Management</p>
-    <input
+    <task-input @addTask="addTask" />
+    <!--<input
       type="text"
       class="task-input"
       placeholder="New Task"
       v-model="newTask"
       @keyup.enter="addTask"
-    />
-    <div
+    />-->
+    <task-item
       v-for="(task, index) in tasks"
       :key="task.id"
-      class="task-item"
       :class="{ completed: task.completed }"
+      :task="task"
+      :index="index"
+      @removedTask="removeTask"
     >
-      <input class="checkbox" type="checkbox" v-model="task.completed" />
+      <!--<input class="checkbox" type="checkbox" v-model="task.completed" />
       <div>
         <span
           class="title"
@@ -28,8 +31,8 @@
       </div>
       <div class="remove-item" @click="removeTask(index)">
         &times;
-      </div>
-    </div>
+      </div>-->
+    </task-item>
     <div class="check-container">
       <div>{{ remaining }} items remaining</div>
       <button class="clearAll" @click="clearAll()">
@@ -40,8 +43,15 @@
 </template>
 
 <script>
+  import taskItem from './taskItem';
+  import taskInput from './taskInput';
+
 export default {
   name: "taskList",
+  components: {
+    taskInput,
+    taskItem
+  },
   data() {
     return {
       newTask: "",
