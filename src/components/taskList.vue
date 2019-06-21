@@ -13,11 +13,18 @@
       :key="task.id"
       class="task-item"
       :class="{ completed: task.completed }"
-      @dblclick="editTask(task)"
     >
       <input class="checkbox" type="checkbox" v-model="task.completed" />
       <div>
-        {{ task.title }}
+        <span
+          class="title"
+          contenteditable="true"
+          @keydown.enter="updateTask($event, task)"
+          v-on:blur="updateTask($event, task)"
+          :class="{ completed: task.isComplete }"
+        >
+          {{ task.title }}
+        </span>
       </div>
       <div class="remove-item" @click="removeTask(index)">
         &times;
@@ -38,7 +45,7 @@ export default {
   data() {
     return {
       newTask: "",
-      idForTask: [],
+      idForTask: 1,
       tasks: []
     };
   },
@@ -64,9 +71,10 @@ export default {
     clearAll() {
       this.tasks = [];
     },
-    editTask: function(task) {
-      this.beforeEditCache = task.title;
-      this.task = task;
+    updateTask: function(e, task) {
+      e.preventDefault();
+      task.title = e.target.innerText;
+      e.target.blur();
     }
   },
   mounted() {
@@ -162,5 +170,9 @@ export default {
     color: white;
     transition: all 0.5s ease-in-out;
   }
+}
+
+.title {
+  outline-color: black;
 }
 </style>
