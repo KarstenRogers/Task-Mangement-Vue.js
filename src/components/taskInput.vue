@@ -16,6 +16,8 @@ export default {
   methods: {
     addTask(index) {
       this.$emit("addTask", index);
+
+      this.newTask = "";
     }
   },
   data() {
