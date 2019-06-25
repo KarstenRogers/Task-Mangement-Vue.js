@@ -16,13 +16,19 @@ export default {
   methods: {
     addTask(index) {
       this.$emit("addTask", index);
-
+      this.tasks.push({
+        id: this.idForTask,
+        title: this.newTask,
+        completed: false
+      });
       this.newTask = "";
+      this.idForTask++;
     }
   },
   data() {
     return {
-      newTask: ""
+      tasks: [],
+        idForTask: 1,
     };
   }
 };
